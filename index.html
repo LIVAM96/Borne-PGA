@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paierie Générale d'ANTANANARIVO   </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        header {
+            background-color: #f4f4f4;
+            background-image: url('images/IMG_20260123_141341.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        .logo {
+            max-height: 80px;
+            width: auto;
+        }
+        .photo {
+            max-height: 80px;
+            width: auto;
+            border-radius: 5px;
+        }
+        .header-content {
+            flex: 1;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 8px;
+        }
+        main {
+            padding: 20px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            background-color: #f4f4f4;
+        }
+        
+        /* Styles pour les onglets */
+        .tabs {
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 400px;
+            position: relative;
+        }
+        
+        .tabs-header {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            padding-bottom: 5px;
+        }
+        
+        .tab-btn {
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: bold;
+            position: relative;
+            transition: all 0.3s ease;
+            margin: 0 5px 5px 0;
+            border-radius: 5px 5px 0 0;
+            text-align: center;
+            background: linear-gradient(to bottom, #f0f0f0, #e0e0e0);
+            box-shadow: 2px -2px 4px rgba(0,0,0,0.1);
+            white-space: nowrap;
+            flex: 1;
+            min-width: 150px;
+            max-width: 200px;
+        }
+        
+        .tab-btn:hover {
+            background: linear-gradient(to bottom, #e0e0e0, #d0d0d0);
+            transform: translateY(-2px);
+        }
+        
+        /* Style pour l'onglet actif */
+        .tab-btn.active {
+            transform: translateY(-2px);
+            box-shadow: inset 3px 0 5px rgba(0,0,0,0.2);
+            border-right: 3px solid #fff;
+            color: #fff;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+            font-weight: bold;
+        }
+        
+        .tab-btn:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -1px;
+            left: 0;
+            background-color: #2196F3;
+            transition: width 0.3s ease;
+        }
+        
+        .tab-btn.active:after {
+            width: 100%;
+        }
+        
+        .tabs-content {
+            position: relative;
+            min-height: 200px;
+            flex: 1;
+            padding: 0 20px;
+        }
+        
+        .tab-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            padding: 20px;
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 0 0 4px 4px;
+        }
+        
+        .tab-content.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Styles spécifiques pour chaque onglet */
+        [data-tab="tab1"] { background: linear-gradient(90deg, #667eea, #764ba2); color: #fff; }
+        [data-tab="tab2"] { background: linear-gradient(90deg, #f093fb, #f5576c); color: #fff; }
+        [data-tab="tab3"] { background: linear-gradient(90deg, #84fab0, #8fd3f4); color: #333; }
+        [data-tab="tab4"] { background: linear-gradient(90deg, #f6d365, #fda085); color: #333; }
+        
+        /* Styles pour les sous-onglets */
+        .sub-tabs {
+            margin-top: 20px;
+        }
+        
+        .sub-tabs-header {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 15px;
+        }
+        
+        .sub-tab-btn {
+            padding: 8px 12px;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            background: linear-gradient(to bottom, #f8f8f8, #e8e8e8);
+            margin-right: 5px;
+            border-radius: 3px 3px 0 0;
+            transition: all 0.3s ease;
+        }
+        
+        .sub-tab-btn:hover {
+            background: linear-gradient(to bottom, #e8e8e8, #d8d8d8);
+        }
+        
+        .sub-tab-btn.active {
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            color: #fff;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+        }
+        
+        .sub-tabs-content {
+            position: relative;
+        }
+        
+        .sub-tab-content {
+            display: none;
+            padding: 15px;
+            background: #fafafa;
+            border: 1px solid #eee;
+            border-radius: 0 4px 4px 4px;
+        }
+        
+        .sub-tab-content.active {
+            display: block;
+        }
+        
+        /* Styles pour les onglets */
+        .tabs {
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 400px;
+            position: relative;
+        }
+        
+        .tabs-header {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            padding-bottom: 5px;
+        }
+        
+        .tab-btn {
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: bold;
+            position: relative;
+            transition: all 0.3s ease;
+            margin: 0 5px 5px 0;
+            border-radius: 5px 5px 0 0;
+            text-align: center;
+            background: linear-gradient(to bottom, #f0f0f0, #e0e0e0);
+            box-shadow: 2px -2px 4px rgba(0,0,0,0.1);
+            white-space: nowrap;
+            flex: 1;
+            min-width: 150px;
+            max-width: 200px;
+        }
+        
+        .tab-btn:hover {
+            background: linear-gradient(to bottom, #e0e0e0, #d0d0d0);
+            transform: translateY(-2px);
+        }
+        
+        /* Style pour l'onglet actif */
+        .tab-btn.active {
+            transform: translateY(-2px);
+            box-shadow: inset 3px 0 5px rgba(0,0,0,0.2);
+            border-right: 3px solid #fff;
+            color: #fff;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+            font-weight: bold;
+        }
+        
+        .tab-btn:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -1px;
+            left: 0;
+            background-color: #2196F3;
+            transition: width 0.3s ease;
+        }
+        
+        .tab-btn.active:after {
+            width: 100%;
+        }
+        
+        .tabs-content {
+            position: relative;
+            min-height: 200px;
+            flex: 1;
+            padding: 0 20px;
+        }
+        
+        .tab-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            padding: 20px;
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 0 0 4px 4px;
+        }
+        
+        .tab-content.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Styles spécifiques pour chaque onglet */
+        [data-tab="tab1"] { background: linear-gradient(90deg, #667eea, #764ba2); color: #fff; }
+        [data-tab="tab2"] { background: linear-gradient(90deg, #f093fb, #f5576c); color: #fff; }
+        
+        /* Styles pour les sous-onglets */
+        .sub-tabs {
+            margin-top: 20px;
+        }
+        
+        .sub-tabs-header {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 15px;
+        }
+        
+        .sub-tab-btn {
+            padding: 8px 12px;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            background: linear-gradient(to bottom, #f8f8f8, #e8e8e8);
+            margin-right: 5px;
+            border-radius: 3px 3px 0 0;
+            transition: all 0.3s ease;
+        }
+        
+        .sub-tab-btn:hover {
+            background: linear-gradient(to bottom, #e8e8e8, #d8d8d8);
+        }
+        
+        .sub-tab-btn.active {
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            color: #fff;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+        }
+        
+        .sub-tabs-content {
+            position: relative;
+        }
+        
+        .sub-tab-content {
+            display: none;
+            padding: 15px;
+            background: #fafafa;
+            border: 1px solid #eee;
+            border-radius: 0 4px 4px 4px;
+        }
+        
+        .sub-tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="images/LOGO_TRESOR.PNG" alt="Logo Trésor" class="logo">
+        <div class="header-content">
+            <h1>Bienvenue à la PAIERIE GÉNÉRALE D'ANTANANARIVO</h1>
+            <nav>
+                <a href="#accueil">Prestations du PGA</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="tabs">
+            <div class="tabs-header">
+                <button class="tab-btn active" data-tab="tab1">PENSIONS</button>
+                <button class="tab-btn" data-tab="tab2">SOLDES</button>
+                <button class="tab-btn" data-tab="tab3" style="background-color: #28a745; color: white;">VERSEMENT</button>
+                <button class="tab-btn" data-tab="tab7">VIREMENT REJETE</button>
+                                <button class="tab-btn" data-tab="tab6">REGIE D'AVANCE</button>
+                <button class="tab-btn" data-tab="tab4">CONSULTATION <br>DES DOSSIERS</button>
+            </div>
+            <div class="tabs-content">
+                <div id="tab1" class="tab-content active">
+                    
+                    <!-- Sous-onglets pour Pensions -->
+                    <div class="sub-tabs">
+                        <div class="sub-tabs-header">
+                            <button class="sub-tab-btn active" data-sub-tab="sub-tab1">Paiement Pension</button>
+                            <button class="sub-tab-btn" data-sub-tab="sub-tab2">Paiement des Derniers Arriérés</button>
+                            <button class="sub-tab-btn" data-sub-tab="sub-tab3">Changement de Localité</button>
+                            <button class="sub-tab-btn" data-sub-tab="sub-tab12">Récupération Avis de Crédit</button>
+                            <button class="sub-tab-btn" data-sub-tab="sub-tab13">Réception de Certificat de Vie</button>
+                            <button class="sub-tab-btn" data-sub-tab="sub-tab14">Remboursement frais médicaux</button>
+                        </div>
+                        <div class="sub-tabs-content">
+                            <div id="sub-tab1" class="sub-tab-content active">
+                                <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                                    <tr>
+                                        <td style="width: 60%; vertical-align: top; padding: 15px;">
+                                            <p><strong>Veuillez vous rendre à la caisse 01 à 12</strong></p>
+                                            <p><strong>Pièces à fournir pour un retrait à la caisse :</strong></p>
+                                            <ul>
+                                            <li><p> 01-  Titre pension (moins de 3 mois)</p></li>
+                                            <li><p> 02-  Carte d'identité Nationale (CIN) originale et moins de 20 ans</p></li>
+                                            <li><p><em> 03- (Présence obligatoire du titulaire lors du paiement)</em></p></li>
+                                            </ul>
+                                        </td>
+                                        <td style="width: 40%; vertical-align: top; padding: 15px; text-align: center;">
+                                            <img src="images/caisse.jpg" alt="Caisse" style="max-width: 70%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="sub-tab2" class="sub-tab-content">
+                                <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                                    <tr>
+                                        <td style="width: 60%; vertical-align: top; padding: 15px;">
+                                            <p><strong>Veuillez vous rendre à la caisse 01 à 12</strong></p>
+                                            <p><strong>Pièces à fournir pour un retrait à la caisse (DERNIERS ARRÉRAGES) :</strong></p>
+                                            <ul>
+                                                <li><p>01-   Acte de décès (original)</p></li>
+                                                <li><p>02-   Acte de notoriété (original)</p></li>
+                                                <li><p>03-  Copie légalisée de la CIN de tous les héritiers (pour les héritiers de plus de 21 ans)</p></li>
+                                                <li><p>04-  Ordonnance de tutelle en provenance du Tribunal (exigé pour les héritiers de moins de 21 ans)</p></li>
+                                                <li><p>05-  Acte de naissance moins de 3 mois (exigé pour les héritiers mineurs)</p></li>
+                                                <li><p>06-  Acte de décès d'un héritier (exigé en cas d'héritier décédé)</p></li>
+                                                <li><p>07-  (procuration et certificat de vie requis si un héritier est absent)</li>
+                                            </ul>
+                                        </td>
+                                        <td style="width: 40%; vertical-align: top; padding: 15px; text-align: center;">
+                                            <img src="images/caisse.jpg" alt="Caisse" style="max-width: 60%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.5)'" onmouseout="this.style.transform='scale(1.2)'">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="sub-tab3" class="sub-tab-content">
+                                <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                                    <tr>
+                                        <td style="width: 100%; vertical-align: top; padding: 15px;">
+                                            <p><strong>Veuillez vous rendre à la Porte 07</strong></p>
+                                            <p><em>(Information spécialement destinée aux assignés à Analamanga)</em></p>
+                                            <p><strong>Documents à fournir :</strong></p>
+                                            <ul>
+                                                <li><p>01- Photocopie CIN (légalisée)</p></li>
+                                                <li><p>02- Bulletin de pension</p></li>
+                                                <li><p>03- Certificat de vie (moins de 3 mois)</p></li>
+                                                <li><p>04- Un formulaire est à remplir (Changement de localité ou Changement d'assignation)</p></li>
+                                            </ul>
+                                            <p><em>Ces dossiers sont à déposer au Service Pension à Ampefiloha à la fin (Immeuble Fiaro, escalier à 2ème étage)</em></p>
+                                        </td>
+                                        <td style="width: 40%; vertical-align: top; padding: 15px; text-align: center;">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="sub-tab12" class="sub-tab-content">
+                                <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                                    <tr>
+                                        <td style="width: 60%; vertical-align: top; padding: 15px;">
+                                            <p><strong>Veuillez vous rendre à la Porte 07</strong></p>
+                                            <p><em>(Uniquement destiné aux assignés à PGA)</em></p>
+                                            <p><em>Récupération d'avis de crédit au moment de la réception du certificat de vie (Tous les 3 mois)</em></p>
+                                            <p><strong>Documents à fournir :</strong></p>
+                                            <ul>
+                                                <li><p>1- La CIN (Carte d'Identité Nationale)</p></li>
+                                                <li><p>2- La carte de pension</p></li>
+                                            </ul>
+                                        </td>
+                                        <td style="width: 40%; vertical-align: top; padding: 15px; text-align: center;">
+                                            <img src="images/avis_credit.jpg" alt="Avis de crédit" style="max-width: 75%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.5)'" onmouseout="this.style.transform='scale(1)'">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="sub-tab13" class="sub-tab-content">
+                                <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                                    <tr>
+                                        <td style="width: 60%; vertical-align: top; padding: 15px;">
+                                            <p><strong>Documents à fournir :</strong></p>
+                                            <ul>
+                                            <li><p>Dépôt d'un certificat de vie tous les trois mois, mais en présence physique du bénéficiaire tous les six mois (Fin mai et Fin novembre). Le certificat de vie est délivré par le Fokontany avec deux témoins, et aussi délivré par le bureau de Commune.</p></li>
+                                            <li><p>Munir de CIN du Bénéficiaire avec Carte pension (originaux)</p></li>
+                                            <li><p>En général, pendant les trois derniers jours du mois cité ci-dessous (jours ouvrables) :</p></li>
+                                            <li><p>(Fin février, fin mai, fin août, fin novembre)</p></li>
+                                            </ul>
+                                        </td>
+                                        <td style="width: 40%; vertical-align: top; padding: 15px; text-align: center;">
+                                            <img src="images/certif_vie.jpg" alt="Certificat de vie" style="max-width: 50%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(2.0)'" onmouseout="this.style.transform='scale(1)'">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="sub-tab14" class="sub-tab-content">
+                                <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                                    <tr>
+                                        <td style="width: 60%; vertical-align: top; padding: 15px;">
+                                            <br>
+                                            <p><strong>Veuillez vous rendre à la caisse 11</strong></p>
+                                            <p><strong>Pièces à fournir pour un retrait à la caisse :</strong></p>
+                                            <ul>
+                                                <li>01- Bon de Caisse</li>
+                                                <li>02- Carte d'identité Nationale (CIN) (originale)</li>
+                                                <li>03- (Présence obligatoire lors du paiement)</li>
+                                            </ul>
+                                        </td>
+                                        <td style="width: 40%; vertical-align: top; padding: 15px; text-align: center;">
+                                            <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; height: 100%;">
+                                                <img src="images/caisse.jpg" alt="Caisse" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.3)'" onmouseout="this.style.transform='scale(1)'">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tab2" class="tab-content">
+                    
+                    <!-- Sous-onglets pour Soldes -->
+                    <div class="sub-tabs">
+                        <div class="sub-tabs-header">
+                            <button class="sub-tab-btn active" data-sub-tab="sub-tab4">Paiement Solde</button>
+                            <button class="sub-tab-btn" data-sub-tab="sub-tab5">Paiement des Derniers Arriérés</button>
+                            <button class="sub-tab-btn" data-sub-tab="sub-tab6">Autres</button>
+                        </div>
+                        <div class="sub-tabs-content">
+                            <div id="sub-tab4" class="sub-tab-content active">
+                                <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                                    <tr>
+                                        <td style="width: 60%; vertical-align: top; padding: 15px;">
+                                            <br>  
+                                            <p><strong>Veuillez vous rendre à la caisse 01 à 12</strong></p>
+                                            <p><strong>Pièces à fournir pour un retrait à la caisse :</strong></p>
+                                            <ul>
+                                            <li><p> 01-  Bon de Caisse </p></li>
+                                            <li><p> 02-  Carte d'identité Nationale (CIN) originale et moins de 3 mois</p></li>
+                                            <li><p><em> 03- (Présence obligatoire lors du paiement)</em></p></li>
+                                            </ul>
+                                        </td>
+                                        <td style="width: 40%; vertical-align: top; padding: 15px; text-align: center;">
+                                            <img src="images/pga_caisse.jpg" alt="Caisse PGA" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="sub-tab5" class="sub-tab-content">
+                                <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                                    <tr>
+                                        <td style="width: 60%; vertical-align: top; padding: 15px;">
+                                            <p><strong>Veuillez vous rendre à la caisse 01 à 12</strong></p>
+                                            <p><strong>Pièces à fournir pour un retrait à la caisse (DERNIERS ARRÉRAGES) :</strong></p>
+                                            <ul>
+                                                <li><p>1-   Acte de décès (original)</p></li>
+                                                <li><p>2-   Acte de notoriété (original)</p></li>
+                                                <li><p>3-   Le Bon de Caisse au nom de l'agent décédé doit être approuvé au SONACO Ambanidia pour modifier le Bénéficiaire au nom des Héritiers</p></li>
+                                                <li><p>4-  Copie légalisée de la CIN de tous les héritiers</p></li>
+                                                <li><p>5-  (procuration et certificat de vie requis si un héritier est absent)</li>
+                                            </ul>
+                                        </td>
+                                        <td style="width: 40%; vertical-align: top; padding: 15px; text-align: center;">
+                                            <img src="images/caisse_pga.jpg" alt="Caisse PGA" style="max-width: 50%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="sub-tab6" class="sub-tab-content">
+                                <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                                    <tr>
+                                        <td style="width: 60%; vertical-align: top; padding: 15px;">
+                                            <p><strong>Récupération de BC, Indemnités ou autres avec Bordereaux d'envoi provenant d'un autre Poste Comptable. Veuillez vous rendre à la Porte 07.</strong></p>
+                                        </td>
+                                        <td style="width: 40%; vertical-align: top; padding: 15px; text-align: center;">
+                                            <img src="images/porte7.jpg" alt="Porte 07" style="max-width: 80%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tab3" class="tab-content">
+                    
+                    <!-- Sous-onglets pour Recettes -->
+                    <div class="sub-tabs">
+                        <div class="sub-tabs-header">
+                            <button class="sub-tab-btn active" data-sub-tab="sub-tab7">Versement de Validation de service</button>
+                            <button class="sub-tab-btn" data-sub-tab="sub-tab8">Versement des Droits de Délivrance de Visa de Séjour et de la Carte de Résident</button>
+                            <button class="sub-tab-btn" data-sub-tab="sub-tab9">Versement des Droits de Passeport</button>
+                            <button class="sub-tab-btn" data-sub-tab="sub-tab10">Versement du reste de la Caisse d'avance</button>
+                            <button class="sub-tab-btn" data-sub-tab="sub-tab11">Versement sur Soldes et Indemnités</button>
+                        </div>
+                        <div class="sub-tabs-content">
+                            <div id="sub-tab7" class="sub-tab-content active">
+                                <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                                    <tr>
+                                        <td style="width: 60%; vertical-align: top; padding: 15px;">
+                                            <p><strong>Veuillez vous rendre à la caisse Recette</strong></p>
+                                            <p><strong>Pièces à fournir :</strong></p>
+                                            <p>Un (1) exemplaire Original et trois (3) exemplaires de la photocopie Certifiée de :</p>
+                                            <ul>
+                                                <li>01- L'Avis d'Émission d'Ordre de recette</li>
+                                                <li>02- L'Ordre de recette</li>
+                                                <li>03- L'État de décompte</li>
+                                            </ul>
+                                            <p><strong>Les Photocopies sont à certifier auprès du Service de la Validation des Services Précaires</strong></p>
+                                            <p><strong>(DIRECTION DE LA SOLDE ET DES PENSIONS)</strong></p>
+                                        </td>
+                                        <td style="width: 40%; vertical-align: top; padding: 15px; text-align: center;">
+                                            <img src="images/caisse_recette.jpg" alt="Caisse Recette" style="max-width: 80%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="sub-tab8" class="sub-tab-content">
+                                <h4>VERSEMENT DES DROITS DE DÉLIVRANCE DE VISA DE SÉJOUR ET DE CARTE DE RÉSIDENT</h4>
+                                <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                                    <tr>
+                                        <td style="width: 60%; vertical-align: top; padding: 15px;">
+                                            <p><strong>Veuillez vous rendre à la Caisse Recette</strong></p>
+                                            <p><strong>Pièces à fournir :</strong></p>
+                                            <ul>
+                                            <li><p>Lettre de Notification originale avec la Signature et le Cachet rouge du MINISTERE DE L'INTERIEUR ET DE LA DECENTRALISATION (MID)</p></li>
+                                            <li><p>État de Décompte du Droit de visa et de la Carte de Séjour Original</p></li>
+                                            <li><p>Passeport du Propriétaire</p></li>
+                                            <li><p>CIN ou PASSEPORT du Déclarant</p></li>
+                                            <li><p>Lettre de Procuration au Déclarant pour plus de 2 personnes sauf si pour des personnes de la même famille</p></li>
+                                            <li><p><strong>En cas de Paiement par Virement Bancaire :</strong></p></li>
+                                            <ul>
+                                                <li>- Copie de l'Ordre de Virement</li>
+                                                <li>- Copie de l'Avis de Débit</li>
+                                                <li>- Copie de l'Etat décadaire fourni par le MID (Paiement en Euro)</li>
+                                            </ul>
+                                            <p><strong>En cas de Paiement par Chèque :</strong></p>
+                                            <p>Le Chèque de Banque est le seul accepté.</p>
+                                        </td>
+                                        <td style="width: 40%; vertical-align: top; padding: 15px; text-align: center;">
+                                            <img src="images/caisse_recette.jpg" alt="Caisse Recette" style="max-width: 80%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="sub-tab9" class="sub-tab-content">
+                                <h4>VERSEMENT DES DROITS DE PASSEPORT</h4>
+                                <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                                    <tr>
+                                        <td style="width: 60%; vertical-align: top; padding: 15px;">
+                                            <p><strong>Veuillez vous rendre à la Caisse Recette</strong></p>
+                                            <p><strong>Pièces à fournir :</strong></p>
+                                            <ul>
+                                            <li><p>01- Avis de Paiement venant du MINISTERE DE LA SECURITE PUBLIQUE (MSP)</p></li>
+                                            <li><p>02- CIN ou PASSEPORT du PROPRIÉTAIRE (PHOTOCOPIE ou ORIGINALE)</p></li>
+                                            <li><p>03- Si Enfant/Mineur : Photocopie de l'Acte de Naissance</p></li>
+                                            <li><p>04- CIN ou PASSEPORT du DÉCLARANT</p></li>
+                                            </ul>
+                                        </td>
+                                        <td style="width: 40%; vertical-align: top; padding: 15px; text-align: center;">
+                                            <img src="images/caisse_recette.jpg" alt="Caisse Recette" style="max-width: 80%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="sub-tab10" class="sub-tab-content">
+                                <h4>VERSEMENT DU RESTE DE LA CAISSE D'AVANCES</h4>
+                                <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                                    <tr>
+                                        <td style="width: 60%; vertical-align: top; padding: 15px;">
+                                            <p><strong>Veuillez vous rendre à la Caisse Recette</strong></p>
+                                            <ul>
+                                            <p><strong>Pièces à fournir :</strong></p>    
+                                            <li><p>01- Photocopie de l'OP Certifié par l'ORDSEC</p></li>
+                                            <li><p>02- Bordereau d'Emploi de Fonds d'Avances signé par L'ORDSEC et le Régisseur</p></li>
+                                            <li><p>03- Fiche de recette à retirer auprès de la porte 109 PGA</p></li>
+                                            </ul>
+                                        </td>
+                                        <td style="width: 40%; vertical-align: top; padding: 15px; text-align: center;">
+                                            <img src="images/caisse_recette.jpg" alt="Caisse Recette" style="max-width: 80%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="sub-tab11" class="sub-tab-content">
+                                
+                                <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                                    <tr>
+                                        <h4>VERSEMENT SUR SOLDE ET INDEMNITÉ</h4>
+                                        <td style="width: 60%; vertical-align: top; padding: 15px;">
+                                            <p><strong>Veuillez vous rendre à la Caisse Recette</strong></p>
+                                            <p><strong>Pièces à fournir :</strong></p>
+                                            <ul>
+                                            <li><p>01- Ordre de Recette signé par l'ORDSEC, avec le motif de Reversement Bien défini</p></li>
+                                            <li><p>02- État de Reversement signé par le Billeteur</p></li>
+                                            <li><p>03- État émargé Original et Photocopie certifiée par l'ORDSEC</p></li>
+                                            <li><p>04- Photocopie du Bulletin de Solde si Reversement sur Solde</p></li>
+                                            </ul>
+                                        </td>
+                                        <td style="width: 40%; vertical-align: top; padding: 15px; text-align: center;">
+                                            <img src="images/caisse_recette.jpg" alt="Caisse Recette" style="max-width: 80%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                <div id="tab4" class="tab-content">
+                    <!-- Sous-onglets pour Situation -->
+                    <div class="sub-tabs">
+                        <div class="sub-tabs-header">
+                            <button class="sub-tab-btn active" data-sub-tab="sub-tab19">Situation pour Acteur Budgétaire</button>
+                            <button class="sub-tab-btn" data-sub-tab="sub-tab20">Situation pour le Public / Usagers</button>
+                        </div>
+                        <div class="sub-tabs-content">
+                            <div id="sub-tab19" class="sub-tab-content active">
+                                <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                                    <tr>
+                                        <td style="width: 60%; vertical-align: top; padding: 15px;">
+                                            <p><strong>Veuillez cliquer sur le lien suivant :</strong></p>
+                                            <p><a href="https://app.tresorpublic.mg:12000/salohy/index.php/site/login" target="_blank" style="color: #0066cc; text-decoration: underline;">https://app.tresorpublic.mg:12000/salohy/index.php/site/login</a></p>
+                                            <p>Sélectionnez ensuite votre rôle, puis consultez votre situation dans le menu « Situation de paiement » ou « Situation des crédits ».</p>
+                                        </td>
+                                        <td style="width: 40%; vertical-align: top; padding: 15px; text-align: center;">
+                                            <img src="images/salohy1.jpg" alt="Salohy" style="max-width: 80%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.5)'" onmouseout="this.style.transform='scale(1)'">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="sub-tab20" class="sub-tab-content">
+                                <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                                    <tr>
+                                        <td style="width: 60%; vertical-align: top; padding: 15px;">
+                                            <p><strong>Consultation des Situations</strong></p>
+                                            <p>Cliquez sur <a href="https://app.tresorpublic.mg:12000/info/" target="_blank" style="color: #0066cc; text-decoration: underline;">https://app.tresorpublic.mg:12000/info/</a>, puis procédez à l'authentification.</p>
+                                        </td>
+                                        <td style="width: 40%; vertical-align: top; padding: 15px; text-align: center;">
+                                            <img src="images/situation.jpg" alt="Situation" style="max-width: 80%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.5)'" onmouseout="this.style.transform='scale(1)'">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tab7" class="tab-content">
+                    <h3>Virement Rejeté</h3>
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                        <tr>
+                            <td style="width: 60%; vertical-align: top; padding: 15px;">
+                                <p><strong>Motif : Rejet de virement (salaire / pension / facture)</strong></p>
+                                <p><strong>Veuillez vous rendre à la Porte 109</strong></p>
+                                <p><strong>Pièces à fournir :</strong></p>
+                                <ul>
+                                    <li>Avis de crédit</li>
+                                    <li>Relevé d'Identité Bancaire (RIB)</li>
+                                    <li>Photocopie de la Carte d'Identité Nationale (CIN) dûment légalisée</li>
+                                    <li>Certificat administratif</li>
+                                </ul>
+                                <p><strong>Procédure :</strong></p>
+                                <p>La PGA délivrera un acte de renseignement à déposer auprès de la SONACO.</p>
+                                <p>Après dépôt et traitement du dossier, celui-ci devra être retourné à la PGA en vue de la reprise de l'opération de virement bancaire.</p>
+                            </td>
+                            <td style="width: 40%; vertical-align: top; padding: 15px; text-align: center;">
+                                <img src="images/109.jpg" alt="Porte 109" style="max-width: 80%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.5)'" onmouseout="this.style.transform='scale(1)'">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="tab6" class="tab-content">
+                    <!-- Sous-onglets pour Régie d'Avance -->
+                    <div class="sub-tabs">
+                        <div class="sub-tabs-header">
+                            <button class="sub-tab-btn active" data-sub-tab="sub-tab15">DEMANDE DE CAISSE D'AVANCE</button>
+                            <button class="sub-tab-btn" data-sub-tab="sub-tab16">DEMANDE DE QUITTANCE</button>
+                            <button class="sub-tab-btn" data-sub-tab="sub-tab17">VERSEMENT DU RESTE DE LA CAISSE D'AVANCE</button>
+                        </div>
+                        <div class="sub-tabs-content">
+                            <div id="sub-tab15" class="sub-tab-content active">
+                                <h4>Veuillez vous rendre à <strong> la Porte 105</strong></h4>
+                                
+                                <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                                    <tr>
+                                        <td style="width: 60%; vertical-align: top; padding: 15px;">
+                                            <p><strong>Documents requis pour la Caisse d'Avance (à partir de la 2e avance) :</strong></p>
+                                            <ul>
+                                                <li><p>Bordereau d'Ordre de Paiement (BOP) signé par ORDSEC  ex</p></li>
+                                                <li><p>Ordre de Paiement (OP) signé par ORDSEC   2 ex</p></li>
+                                                <li><p>Avis de crédit (AC) signé par ORDSEC   1 ex</p></li>
+                                                <li><p>Photocopie TEF comptable certifiée par ORDSEC   1 ex</p></li>
+                                                <li><p>Demande d'Avance de Fonds (DAF) signé par ORDSEC et le Régisseur   2 ex</p></li>
+                                                <li><p>• Et visé par CF si montant est supérieur à 2.500.000 Ar</p></li>
+                                                <li><p>• Sans visa du CF si CHED [Eau et électricité, téléphone, internet, frais de déplacement (vol aérien, billet d'une agence de voyage)] et pour les autres comptes dont le montant est inférieur ou égal à 2.500.000 Ar mais avec double signature de l'Ordsec.</p></li>
+                                                <li><p>Certificat d'Engagement (CE) signé par ORDSEC   2 ex</p></li>
+                                                <li><p>Copie certifiée par ORDSEC de tous les Arrêtés :</p></li>
+                                                <li><p>• Création de régie d'Avance1 ex</p></li>
+                                                <li><p>• Nomination du Régisseur1 ex</p></li>
+                                                <li><p>• Mise en place de fonds pour MDG et MFA   1 ex</p></li>
+                                                <li><p>• Dernier Quitus (copie certifiée par le Payeur Général ou Fondé de pouvoirs)   1 ex</p></li>
+                                                <li><p>et/ou certificat de non régisseur signé par l'Ordsec.</p></li>
+                                                <li><p>(sans Quitus à partir de la 3e avance)</p></li>
+                                                <li><p>Etat d'emploi paraphé par le Fondé de Pouvoirs de la dernière régularisation   1 ex</p></li>
+                                            </ul>
+                                        </td>
+                                        <td style="width: 40%; vertical-align: top; padding: 15px; text-align: center;">
+                                            <img src="images/105.jpg" alt="Porte 105" style="max-width: 80%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.5)'" onmouseout="this.style.transform='scale(1)'">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="sub-tab16" class="sub-tab-content">
+                                <h4>Veuillez vous rendre <strong>à la Porte 109</strong></h4>
+                                <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                                    <tr>
+                                        <td style="width: 60%; vertical-align: top; padding: 15px;">
+                                            <p><strong>Documents à fournir pour la Demande de Quitus :</strong></p>
+                                            <ol>
+                                                <li><p>01 - État d'Emploi récapitulé, signé par l'ORDSEC et le Régisseur 2 ex (en date du 31 Décembre 202x) mentionnant :</p>
+                                                    <ul>
+                                                        <li>• Code Régisseur</li>
+                                                        <li>• Code SOA et imputation budgétaire</li>
+                                                        <li>• Nature de la dépense</li>
+                                                        <li>• Montant et référence du mandatement de la régularisation (s'il y a IMP, séparez les montants de l'IMP 8% et le 92%)</li>
+                                                        <li>• Total des montants (OP-Régularisation-Reste)</li>
+                                                        <li>• Référence de la quittance de reversement reliquat</li>
+                                                    </ul>
+                                                </li>
+                                                <li><p>02 - Photocopie certifiée à la PGA de la Quittance de versement (reliquat/IMP) 1 ex</p></li>
+                                                <li><p>03 - Photocopie certifiée par l'Ordsec de tous les Arrêtés (création, nomination, mise en place) 1 ex</p></li>
+                                                <li><p>04 - État d'emploi paraphé par le Fondé de Pouvoirs de la dernière régularisation 1 ex</p></li>
+                                            </ol>
+                                        </td>
+                                        <td style="width: 40%; vertical-align: top; padding: 15px; text-align: center;">
+                                            <img src="images/109.jpg" alt="Porte 109" style="max-width: 80%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.5)'" onmouseout="this.style.transform='scale(1)'">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="sub-tab17" class="sub-tab-content">
+                                <h4>Veuillez vous rendre à <strong>la Caisse Recette</strong></h4>
+                                <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                                    <tr>
+                                        <td style="width: 60%; vertical-align: top; padding: 15px;">
+                                            <ol>
+                                                <li><p>Photocopie de l'OP Certifié par l'ORDSEC</p></li>
+                                                <li><p>Bordereau d'Emploi de Fonds d'Avances signé par L'ORDSEC et le Régisseur</p></li>
+                                                <li><p>Fiche de recette à retirer auprès de la porte 109 PGA</p></li>
+                                            </ol>
+                                        </td>
+                                        <td style="width: 40%; vertical-align: top; padding: 15px; text-align: center;">
+                                            <img src="images/porte7.jpg" alt="Porte 7" style="max-width: 50%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.5)'" onmouseout="this.style.transform='scale(1)'">
+                                            <br><br>
+                                            <img src="images/109.jpg" alt="Porte 109" style="max-width: 50%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.5)'" onmouseout="this.style.transform='scale(1)'">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2026 Direction de la Comptabilité Publique. Tous droits réservés.</p>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Gestion des onglets principaux
+            const tabBtns = document.querySelectorAll('.tabs > .tabs-header > .tab-btn');
+            const tabContents = document.querySelectorAll('.tabs > .tabs-content > .tab-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Supprimer la classe active de tous les boutons et contenus principaux
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Ajouter la classe active au bouton cliqué
+                    this.classList.add('active');
+                    
+                    // Afficher le contenu correspondant
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Gestion des sous-onglets (dans tous les onglets principaux)
+            function initializeSubTabs() {
+                const subTabBtns = document.querySelectorAll('.sub-tab-btn');
+                const subTabContents = document.querySelectorAll('.sub-tab-content');
+                
+                if (subTabBtns.length > 0 && subTabContents.length > 0) {
+                    subTabBtns.forEach(btn => {
+                        btn.addEventListener('click', function(e) {
+                            e.stopPropagation(); // Empêcher la propagation du clic
+                            
+                            // Supprimer la classe active de tous les boutons et contenus de sous-onglets
+                            subTabBtns.forEach(b => b.classList.remove('active'));
+                            subTabContents.forEach(c => c.classList.remove('active'));
+                            
+                            // Ajouter la classe active au bouton cliqué
+                            this.classList.add('active');
+                            
+                            // Afficher le contenu correspondant
+                            const tabId = this.getAttribute('data-sub-tab');
+                            const targetContent = document.getElementById(tabId);
+                            if (targetContent) {
+                                targetContent.classList.add('active');
+                            }
+                        });
+                    });
+                    
+                    // Initialisation : s'assurer que le premier sous-onglet est visible pour chaque onglet principal actif
+                    function activateFirstSubTab() {
+                        const allMainTabs = document.querySelectorAll('.tabs > .tabs-header > .tab-btn');
+                        allMainTabs.forEach(mainTab => {
+                            if (mainTab.classList.contains('active')) {
+                                const mainTabId = mainTab.getAttribute('data-tab');
+                                const mainContent = document.getElementById(mainTabId);
+                                if (mainContent) {
+                                    const firstSubTab = mainContent.querySelector('.sub-tabs-header > .sub-tab-btn.active');
+                                    if (firstSubTab) {
+                                        const firstSubTabId = firstSubTab.getAttribute('data-sub-tab');
+                                        const firstSubContent = mainContent.querySelector('.sub-tabs-content > #' + firstSubTabId);
+                                        if (firstSubContent) {
+                                            firstSubContent.classList.add('active');
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    }
+                    
+                    // Activer le premier sous-onglet au chargement
+                    activateFirstSubTab();
+                }
+            }
+            
+            // Initialiser les sous-onglets au chargement de la page
+            initializeSubTabs();
+        });
+    </script>
+</body>
+</html>

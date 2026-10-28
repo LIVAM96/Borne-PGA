@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paierie Générale d'ANTANANARIVO   </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        header {
+            background-color: #f4f4f4;
+            background-image: url('images/IMG_20260123_141341.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        .logo {
+            max-height: 80px;
+            width: auto;
+        }
+        .photo {
+            max-height: 80px;
+            width: auto;
+            border-radius: 5px;
+        }
+        .header-content {
+            flex: 1;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 8px;
+        }
+        main {
+            padding: 20px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            background-color: #f4f4f4;
+        }
+        
+        /* Styles pour les onglets */
+        .tabs {
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 400px;
+            position: relative;
+        }
+        
+        .tabs-header {
+            display: flex;
+            flex-wrap: wrap;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            padding-bottom: 5px;
+        }
+        
+        .tab-btn {
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: bold;
+            position: relative;
+            transition: all 0.3s ease;
+            margin: 0 5px 5px 0;
+            border-radius: 5px 5px 0 0;
+            text-align: center;
+            background: linear-gradient(to bottom, #f0f0f0, #e0e0e0);
+            box-shadow: 2px -2px 4px rgba(0,0,0,0.1);
+            white-space: nowrap;
+            flex: 1;
+            min-width: 150px;
+            max-width: 200px;
+        }
+        
+        .tab-btn:hover {
+            background: linear-gradient(to bottom, #e0e0e0, #d0d0d0);
+            transform: translateY(-2px);
+        }
+        
+        /* Styles spécifiques pour chaque onglet */
+        [data-tab="tab1"] { background: linear-gradient(90deg, #ff9a9e, #fad0c4); color: #fff; }
+        [data-tab="tab2"] { background: linear-gradient(90deg, #a1c4fd, #c2e9fb); color: #333; }
+        [data-tab="tab3"] { background: linear-gradient(90deg, #84fab0, #8fd3f4); color: #333; }
+        [data-tab="tab4"] { background: linear-gradient(90deg, #f6d365, #fda085); color: #333; }
+        [data-tab="tab5"] { background: linear-gradient(90deg, #a6c1ee, #fbc2eb); color: #333; }
+        [data-tab="tab6"] { background: linear-gradient(90deg, #d4fc79, #96e6a1); color: #333; }
+        [data-tab="tab7"] { background: linear-gradient(90deg, #8e2de2, #4a00e0); color: #fff; }
+        [data-tab="tab8"] { background: linear-gradient(90deg, #f093fb, #f5576c); color: #fff; }
+        [data-tab="tab9"] { background: linear-gradient(90deg, #43e97b, #38f9d7); color: #333; }
+        [data-tab="tab10"] { background: linear-gradient(90deg, #667eea, #764ba2); color: #fff; }
+        [data-tab="tab11"] { background: linear-gradient(90deg, #667eea, #764ba2); color: #fff; }
+        [data-tab="tab12"] { background: linear-gradient(90deg, #667eea, #764ba2); color: #fff; }
+        [data-tab="tab13"] { background: linear-gradient(90deg, #667eea, #764ba2); color: #fff; }
+        [data-tab="tab14"] { background: linear-gradient(90deg, #667eea, #764ba2); color: #fff; }
+        [data-tab="tab15"] { background: linear-gradient(90deg, #667eea, #764ba2); color: #fff; }
+        [data-tab="tab16"] { background: linear-gradient(90deg, #ffecd2, #fcb69f); color: #333; }
+        [data-tab="tab17"] { background: linear-gradient(90deg, #a8edea, #fed6e3); color: #333; }
+        [data-tab="tab18"] { background: linear-gradient(90deg, #d299c2, #fef9d7); color: #333; }
+        [data-tab="tab19"] { background: linear-gradient(90deg, #89f7fe, #66a6ff); color: #fff; }
+        [data-tab="tab20"] { background: linear-gradient(90deg, #fddb92, #d1fdff); color: #333; }
+        
+        /* Effet au survol */
+        
+        /* Style pour l'onglet actif */
+        .tab-btn.active {
+            transform: translateY(-2px);
+            box-shadow: inset 3px 0 5px rgba(0,0,0,0.2);
+            border-right: 3px solid #fff;
+        }
+        
+        .tab-btn.active {
+            color: #fff;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+            font-weight: bold;
+        }
+        
+        .tab-btn:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -1px;
+            left: 0;
+            background-color: #2196F3;
+            transition: width 0.3s ease;
+        }
+        
+        .tab-btn.active:after {
+            width: 100%;
+        }
+        
+        .tabs-content {
+            position: relative;
+            min-height: 200px;
+            flex: 1;
+            padding: 0 20px;
+        }
+        
+        .tab-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            padding: 20px;
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 0 0 4px 4px;
+        }
+        
+        .tab-content.active {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="images/LOGO_TRESOR.PNG" alt="Logo Trésor" class="logo">
+        <div class="header-content">
+            <h1>Bienvenue à la PAIERIE GÉNÉRALE D'ANTANANARIVO</h1>
+            <nav>
+                <a href="#accueil">Service au PGA</a> |
+                <a href="dossier.html">Dossiers requis pour mandatement</a> |
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="tabs">
+            <div class="tabs-header">
+                <button class="tab-btn active" data-tab="tab1">Paiement des<br>Derniers Arriérés</button>
+                <button class="tab-btn" data-tab="tab2">Paiement <br>pension ou solde</button>
+                <button class="tab-btn" data-tab="tab3">Changement de localité</button>
+                <button class="tab-btn" data-tab="tab4">Récupération<br> Avis de Crédit</button>
+                <button class="tab-btn" data-tab="tab5">Réception <br>de certificat de vie</button>
+                <button class="tab-btn" data-tab="tab6">Situation de dossier</button>
+                <button class="tab-btn" data-tab="tab7">Demande de<br> Caisse d'Avance</button>
+                <button class="tab-btn" data-tab="tab8">Demande de Quittus</button>
+                <button class="tab-btn" data-tab="tab9">Virement rejeté</button>
+                <button class="tab-btn" data-tab="tab10">Versement de validation<br>de Service</button>
+                <button class="tab-btn" data-tab="tab11">Versement Droit de<br>Délivrance de visa<br>et Carte de résident</button>
+                <button class="tab-btn" data-tab="tab12">Versement des<br>Droits de Passeport</button>
+                <button class="tab-btn" data-tab="tab13">Versement reste<br>Caisse d'Avances</button>
+                <button class="tab-btn" data-tab="tab14">Versement IMP<br>sur Marchés Publics (8%)</button>
+                <button class="tab-btn" data-tab="tab15">Versement sur<br>Solde et Indemnité</button>
+                <button class="tab-btn" data-tab="tab16">Inscription Portail</button>
+                <button class="tab-btn" data-tab="tab17">Ajout d'Activité</button>
+                <button class="tab-btn" data-tab="tab18">Ajout Rôle</button>
+                <button class="tab-btn" data-tab="tab19">Suivi Dossier</button>
+                <button class="tab-btn" data-tab="tab20">Consultation des Situations</button>
+            </div>
+            <div class="tabs-content">
+                <div id="tab1" class="tab-content active">
+                    <h3>Pièces à fournir pour un retrait à la caisse (DERNIERS ARRÉRÉS) :</h3>
+                    <ul style="list-style-type: disc; margin-left: 20px; line-height: 1.6;">
+                        <li>Acte de décès</li>
+                        <li>Acte de notoriété</li>
+                        <li>Copie légalisée de la CIN de tous les héritiers</li>
+                        <li style="margin-left: 20px; font-style: italic;">(procuration et certificat de vie requis si un héritier est absent)</li>
+                    </ul>
+                </div>
+                <div id="tab2" class="tab-content">
+                    <h3>Pièces à fournir pour un retrait à la caisse (PENSION OU SOLDE):</h3>
+                    <ul style="list-style-type: disc; margin-left: 20px; line-height: 1.6;">
+                        <li>Titre pension ou Bon de caisse</li>
+                        <li>Carte d'identité Nationale (CIN)</li>
+                        <li style="margin-left: 20px; font-style: italic;">(Présence obligatoire lors du paiement) </li>
+                    </ul>
+                </div>
+                <div id="tab3" class="tab-content">
+                    <h3>Documents à fournir  : Porte 07</h3>
+                    <ul style="list-style-type: disc; margin-left: 20px; line-height: 1.6;">
+                        <li>Photocopie CIN (légalisé)</li>
+                        <li>Bulletin de pension</li>
+                        <li>Certificat de vie (moins de 3 mois)</li>
+                        <li style="margin-left: 20px; font-style: italic;">Un formulaire est à remplir (Changement de localité ou Changement d'assignation)</li>
+                    </ul>
+                </div>
+                <div id="tab4" class="tab-content">
+                    <h3>Récupération Avis de Crédit  -  Porte 07</h3>
+                    <p>Documents à fournir :  </p>
+                    <ul style="list-style-type: disc; margin-left: 20px; line-height: 1.6;">
+                        <li>La CIN (Carte d'Identité Nationale)</li>
+                        <li>La carte de pension</li>
+                    </ul>
+                </div>
+                <div id="tab5" class="tab-content">
+                    <h3>Documents à fournir :</h3>
+                    <ul style="list-style-type: disc; margin-left: 20px; line-height: 1.6;">
+                        <li>Dépôt d'un certificat de vie tous les trois mois, en présence physique du bénéficiaire.</li>
+                        <li style="margin-left: 20px; font-style: italic;">(Fin Février, Fin Mai, Fin Août, Fin Novembre)</li>
+                    </ul>
+                </div>
+                <div id="tab6" class="tab-content">
+                    <h3>Suivi de votre dossier</h3>
+                    <p>Pour suivre l'état de votre dossier en ligne :</p>
+                    <ol style="margin-left: 20px; line-height: 1.6;">
+                        <li>Accédez au site <a href="https://app.tresorpublic.mg:12000/info" target="_blank" style="color: #0066cc; text-decoration: underline;">https://app.tresorpublic.mg:12000/info</a></li>
+                        <li>Saisissez votre identifiant (login)</li>
+                        <li>Allez dans le menu</li>
+                        <li>Sélectionnez « SUIVI DOSSIER »</li>
+                    </ol>
+                    
+                </div>
+                <div id="tab7" class="tab-content">
+                    <h3>Documents requis pour la Caisse d'Avance (à partir de la 2<sup>e</sup> avance) :</h3>
+                    <ol style="list-style-type: decimal; margin-left: 20px; line-height: 1.6;">
+                        <li>Bordereau d'Ordre de Paiement (BOP) signé par ORDSEC <span style="float: right;">2 ex</span></li>
+                        <li>Ordre de Paiement (OP) signé par ORDSEC <span style="float: right;">2 ex</span></li>
+                        <li>Avis de crédit (AC) signé par ORDSEC <span style="float: right;">1 ex</span></li>
+                        <li>Photocopie TEF comptable certifiée par ORDSEC <span style="float: right;">1 ex</span></li>
+                        <li>Demande d'Avance de Fonds (DAF) signé par ORDSEC et le Régisseur <span style="float: right;">2 ex</span>
+                            <ul style="list-style-type: none; margin-left: 20px; font-style: italic;">
+                                <li>• Et visé par CF si montant est supérieur à 2.500.000 Ar</li>
+                                <li>• Sans visa du CF si CHED [Eau et électricité, téléphone, internet, frais de déplacement (vol aérien, billet d'une agence de voyage)] et pour les autres comptes dont le montant est inférieur ou égal à 2.500.000 Ar mais avec double signature de l'Ordsec.</li>
+                            </ul>
+                        </li>
+                        <li>Certificat d'Engagement (CE) signé par ORDSEC <span style="float: right;">2 ex</span></li>
+                        <li>Copie certifiée par ORDSEC de tous les Arrêtés :
+                            <ul style="list-style-type: none; margin-left: 20px;">
+                                <li>• Création de régie d'Avance <span style="float: right;">1 ex</span></li>
+                                <li>• Nomination du Régisseur <span style="float: right;">1 ex</span></li>
+                                <li>• Mise en place de fonds pour MDG et MFA <span style="float: right;">1 ex</span></li>
+                            </ul>
+                        </li>
+                        <li>Dernier Quitus (copie certifiée par le Payeur Général ou Fondé de pouvoirs) <span style="float: right;">1 ex</span>
+                            <p style="margin-left: 20px; font-style: italic;">et/ou certificat de non régisseur signé par l'Ordsec.<br>(sans Quitus à partir de la 3<sup>e</sup> avance)</p>
+                        </li>
+                        <li>Etat d'emploi paraphé par le Fondé de Pouvoirs de la dernière régularisation <span style="float: right;">1 ex</span></li>
+                    </ol>
+                </div>
+                <div id="tab8" class="tab-content">
+                    <h3>Documents à fournir pour la Demande de Quittus :</h3>
+                    <ul style="list-style-type: none; margin-left: 20px; line-height: 1.8;">
+                        <li><strong>1. Etat d'Emploi récapitulé</strong>, signé par l'ORDSEC et le Régisseur <span style="float: right;">2 ex</span>
+                            <p style="margin-left: 20px; font-style: italic;">(en date du 31 Décembre 202x) mentionnant :</p>
+                            <ul style="list-style-type: none; margin-left: 40px;">
+                                <li>• Code Régisseur</li>
+                                <li>• Code SOA et imputation budgétaire</li>
+                                <li>• Nature de la dépense</li>
+                                <li>• Montant et référence du mandatement de la régularisation</li>
+                                <li style="margin-left: 20px; font-style: italic;">(s'il y a IMP, séparez les montants de l'IMP 8% et le 92%)</li>
+                                <li>• Total des montants (OP-Régularisation-Reste)</li>
+                                <li>• Référence de la quittance de reversement reliquat</li>
+                            </ul>
+                        </li>
+                        <li style="margin-top: 10px;"><strong>2. Photocopie certifiée à la PGA</strong> de la Quittance de versement (reliquat/IMP) <span style="float: right;">1 ex</span></li>
+                        <li style="margin-top: 10px;"><strong>3. Photocopie certifiée par l'Ordsec</strong> de tous les Arrêtés (création, nomination, mise en place) <span style="float: right;">1 ex</span></li>
+                        <li style="margin-top: 10px;"><strong>4. Etat d'emploi paraphé</strong> par le Fondé de Pouvoirs de la dernière régularisation <span style="float: right;">1 ex</span></li>
+                    </ul>
+                </div>
+                <div id="tab9" class="tab-content">
+                    <h3>Motif : Rejet de virement (salaire / pension / facture)</h3>
+                    
+                    <h4>Pièces à fournir :</h4>
+                    <ul style="list-style-type: disc; margin-left: 20px; line-height: 1.6;">
+                        <li>Avis de crédit</li>
+                        <li>Relevé d'Identité Bancaire (RIB)</li>
+                        <li>Photocopie de la Carte d'Identité Nationale (CIN) dûment légalisée</li>
+                        <li>Certificat administratif</li>
+                    </ul>
+
+                    <h4>Procédure :</h4>
+                    <p>La PGA délivrera un acte de renseignement à déposer auprès de la SONACO.</p>
+                    <p>Après dépôt et traitement du dossier, celui-ci devra être retourné à la PGA en vue de la reprise de l'opération de virement bancaire.</p>
+                </div>
+                
+                <div id="tab10" class="tab-content">
+                    <h3>VERSEMENT DES COTISATIONS SUITE À LA VALIDATION DE SERVICES</h3>
+                    
+                    <p>Un (1) exemplaire Original et trois (3) exemplaires de la photocopie Certifiée de :</p>
+                    <ul style="list-style-type: none; margin-left: 20px; line-height: 1.6;">
+                        <li>- L'Avis d'Émission d'Ordre de recette</li>
+                        <li>- L'Ordre de recette</li>
+                        <li>- L'État de décompte</li>
+                    </ul>
+                    
+                    <p style="margin-top: 15px; font-style: italic;">
+                        Les Photocopies sont à certifier auprès du Service de la Validation des Services Précaires<br>
+                        (DIRECTION DE LA SOLDE ET DES PENSIONS)
+                    </p>
+                </div>
+                
+                <div id="tab11" class="tab-content">
+                    <h3>VERSEMENT DES DROITS DE DÉLIVRANCE DE VISA DE SÉJOUR ET DE CARTE DE RÉSIDENT</h3>
+                    
+                    <ul style="list-style-type: disc; margin-left: 20px; line-height: 1.6;">
+                        <li>Lettre de Notification originale avec la Signature et le Cachet rouge du MINISTERE DE L'INTERIEUR ET DE LA DECENTRALISATION (MID)</li>
+                        <li>État de Décompte du Droit de visa et de la Carte de Séjour Original</li>
+                        <li>Passeport du Propriétaire</li>
+                        <li>CIN ou PASSEPORT du Déclarant</li>
+                        <li>Lettre de Procuration au Déclarant pour plus de 2 personnes sauf si pour des personnes de la même famille </li>
+                    </ul>
+                    
+                    <h4>En cas de Paiement par Virement Bancaire :</h4>
+                    <ul style="list-style-type: none; margin-left: 20px; line-height: 1.6;">
+                        <li>- Copie de l'Ordre de Virement</li>
+                        <li>- Copie de l'Avis de Débit</li>
+                        <li>- Copie de l'Etat décadaire fourni par le MID (Paiement en Euro)</li>
+                    </ul>
+                    
+                    <h4>En cas de Paiement par Chèque :</h4>
+                    <p>Le Chèque de Banque est le seul accepté.</p>
+                </div>
+                
+                <div id="tab12" class="tab-content">
+                    <h3>VERSEMENT DES DROITS DE PASSEPORT</h3>
+                    
+                    <ul style="list-style-type: disc; margin-left: 20px; line-height: 1.6;">
+                        <li>Avis de Paiement venant du MINISTERE DE LA SECURITE PUBLIQUE (MSP)</li>
+                        <li>CIN ou PASSEPORT du PROPRIÉTAIRE (PHOTOCOPIE ou ORIGINALE)</li>
+                        <li>Si Enfant/Mineur : Photocopie de l'Acte de Naissance</li>
+                        <li>CIN ou PASSEPORT du DÉCLARANT</li>
+                    </ul>
+                </div>
+                
+                <div id="tab13" class="tab-content">
+                    <h3>VERSEMENT RESTE CAISSE D'AVANCES</h3>
+                    
+                    <ul style="list-style-type: disc; margin-left: 20px; line-height: 1.6;">
+                        <li>Photocopie de l'OP Certifié par l'ORDSEC</li>
+                        <li>Bordereau d'Emploi de Fonds d'Avances signé par L'ORDSEC et le Régisseur</li>
+                        <li>Fiche de recette à retirer auprès de la porte 109 PGA</li>
+                    </ul>
+                </div>
+                
+                <div id="tab14" class="tab-content">
+                    <h3>VERSEMENT IMPÔT SUR LES MARCHÉS PUBLICS (IMP 8%)</h3>
+                    
+                    <ul style="list-style-type: disc; margin-left: 20px; line-height: 1.6;">
+                        <li>Photocopie de l'OP Certifiée par l'ORDSEC</li>
+                        <li>État de Décompte de l'IMP 8% signé par l'ORDSEC</li>
+                        <li>État de retenue de l'IMP 8% signé par l'ORDSEC</li>
+                        <li>Fiche de recette à retirer auprès de la porte 109 PGA</li>
+                    </ul>
+                </div>
+                
+                <div id="tab15" class="tab-content">
+                    <h3>VERSEMENT SUR SOLDE ET INDEMNITÉ</h3>
+                    
+                    <ul style="list-style-type: disc; margin-left: 20px; line-height: 1.6;">
+                        <li>Ordre de Recette signé par l'ORDSEC, avec le motif de Reversement Bien défini</li>
+                        <li>État de Reversement signé par le Billeteur</li>
+                        <li>État émargé Original et Photocopie certifiée par l'ORDSEC</li>
+                        <li>Photocopie du Bulletin de Solde si Reversement sur Solde</li>
+                    </ul>
+                </div>
+                <div id="tab16" class="tab-content">
+                    <h3>Inscription Portail</h3>
+                    <p>Cliquez sur <a href="https://app.tresorpublic.mg:12000/info/inscription_info.php" target="_blank" style="color: #0066cc; text-decoration: underline;">https://app.tresorpublic.mg:12000/info/inscription_info.php</a></p>
+                    <ul style="list-style-type: disc; margin-left: 20px; line-height: 1.6;">
+                        <li>Remplir le formulaire, puis attendre la validation de l'inscription. Entre-temps, vous recevrez un e-mail</li>
+                    </ul>
+                    <img src="images/inscription.jpg" alt="Inscription Portail" style="max-width: 50%; height: auto; margin: 20px 0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                </div>
+                <div id="tab17" class="tab-content">
+                    <h3>Ajout d'Activité</h3>
+                    <p>Cliquez sur <a href="https://app.tresorpublic.mg:12000/info/" target="_blank" style="color: #0066cc; text-decoration: underline;">https://app.tresorpublic.mg:12000/info/</a>, puis procédez à l'authentification.</p>
+                    <img src="images/ajout_activite.jpg" alt="Ajout Activité" style="max-width: 50%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                </div>
+                <div id="tab18" class="tab-content">
+                    <h3>Ajout Rôle</h3>
+                    <p>Cliquez sur <a href="https://app.tresorpublic.mg:12000/info/" target="_blank" style="color: #0066cc; text-decoration: underline;">https://app.tresorpublic.mg:12000/info/</a>, puis procédez à l'authentification.</p>
+                    <img src="images/role.jpg" alt="Rôle" style="max-width: 50%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-bottom: 20px;">
+                    <img src="images/ajout_role.jpg" alt="Ajout Rôle" style="max-width: 50%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                </div>
+                <div id="tab19" class="tab-content">
+                    <h3>Suivi Dossier</h3>
+                    <p>Cliquez sur <a href="https://app.tresorpublic.mg:12000/info/" target="_blank" style="color: #0066cc; text-decoration: underline;">https://app.tresorpublic.mg:12000/info/</a>, puis procédez à l'authentification.</p>
+                    <img src="images/suivi_dossier.jpg" alt="Suivi Dossier" style="max-width: 50%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                </div>
+                <div id="tab20" class="tab-content">
+                    <h3>Consultation des Situations</h3>
+                    <p>Cliquez sur <a href="https://app.tresorpublic.mg:12000/info/" target="_blank" style="color: #0066cc; text-decoration: underline;">https://app.tresorpublic.mg:12000/info/</a>, puis procédez à l'authentification.</p>
+                    <img src="images/situation.jpg" alt="Consultation des Situations" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                </div>
+            </div>
+        </div>
+        
+        
+    </main>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Supprimer la classe active de tous les boutons et contenus
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Ajouter la classe active au bouton cliqué
+                    this.classList.add('active');
+                    
+                    // Afficher le contenu correspondant
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+        });
+    </script>
+
+    <footer>
+        <p>&copy; 2026 Direction de la Comptabilité Publique. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>

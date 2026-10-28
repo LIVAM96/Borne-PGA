@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paierie Général d'ANTANANARIVO   </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        header {
+            background-color: #f4f4f4;
+            background-image: url('images/IMG_20260123_141341.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        .logo {
+            max-height: 80px;
+            width: auto;
+        }
+        .photo {
+            max-height: 80px;
+            width: auto;
+            border-radius: 5px;
+        }
+        .header-content {
+            flex: 1;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        /* Styles pour les onglets */
+        .tabs {
+            margin: 30px 0;
+        }
+        
+        .tabs-header {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .tab-btn {
+            padding: 12px 24px;
+            background: #f4f4f4;
+            border: none;
+            border-radius: 5px 5px 0 0;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border: 1px solid #ddd;
+            border-bottom: none;
+            position: relative;
+            bottom: -1px;
+        }
+        
+        .tab-btn.active {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+            background: #fff;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .tab-content.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        header {
+            background-color: #f4f4f4;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        
+        nav {
+            margin: 15px 0;
+        }
+        
+        nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        
+        nav a:hover {
+            color: #3498db;
+            text-decoration: underline;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        .page-header h2 {
+            color: #2c3e50;
+            margin: 0 0 10px 0;
+            border: none;
+            padding: 0;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .dossier-section {
+            flex: 1;
+            min-width: 300px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        ul {
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        
+        .important {
+            background-color: #fff8e1;
+            padding: 15px;
+            border-right: 4px solid #ffc107;
+            margin: 20px 0;
+            font-style: italic;
+        }
+        
+        .btn-retour {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-retour:hover {
+            background-color: #2980b9;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="images/LOGO_TRESOR.PNG" alt="Logo Trésor" class="logo">
+        <div class="header-content">
+            <h1>Bienvenue au PAIERIE GENERALE D'ANTANANARIVO</h1>
+            <nav>
+                <a href="index.html">Service au PGA</a> |
+                <a href="dossier.html">Dossiers requis pour mandatement</a> |
+            </nav>
+        </div>
+    </header>
+    
+    <div class="page-header">
+        <h2>Dossiers Requis pour Mandatement</h2>
+        
+    </div>
+    
+    <div class="tabs">
+        <div class="tabs-header">
+            <button class="tab-btn active" data-tab="tab1">Derniers arrérages</button>
+            <button class="tab-btn" data-tab="tab2">Secours décès</button>
+            <button class="tab-btn" data-tab="tab3">Pensionné(e) décédé(e)</button>
+            <button class="tab-btn" data-tab="tab4">Pensions de veuvage,<br>agent décédé en activité</button>
+            <button class="tab-btn" data-tab="tab5">Changement de<br>carte de pension</button>
+            <button class="tab-btn" data-tab="tab6">Changement de<br>localité</button>
+            <button class="tab-btn" data-tab="tab7">Paiement en<br>numéraire ou<br>virement bancaire</button>
+            <button class="tab-btn" data-tab="tab8">Paiement au profit<br>d'un mandataire</button>
+        </div>
+        
+        <div id="tab1" class="tab-content active">
+            <h3>Dossier requis au caisse :</h3>
+            <ul style="list-style-type: disc; margin-left: 20px; line-height: 1.6;">
+                <li>Demande (enfant)</li>
+                <li>Acte de décès (2 Originales + 1 photocopie)</li>
+                <li>Acte de Notoriété (02 exemplaires)</li>
+                <li>Si enfant mineur : + 02 Ordonnance de tutelle</li>
+                <li>En cas de décès d'un enfant : + 02 Actes de décès enfant et acte de notoriété</li>
+                <li>Dernier Titre de paiement de pension (Original + photocopie)</li>
+            </ul>
+        </div>
+        
+        <div id="tab2" class="tab-content">
+            <h3>Documents à fournir :</h3>
+            <ul style="list-style-type: disc; margin-left: 20px; line-height: 1.6;">
+                <li>Demande (Veuf/ve)</li>
+                <li>Acte de décès (Original + Photocopie)</li>
+                <li>Acte de mariage</li>
+                <li>Certificat de non séparation du corps et de non divorce</li>
+                <li>Bulletin de pension (Original + Photocopie)</li>
+                <li>Photocopie CIN du/de la veuf(ve)</li>
+            </ul>
+            
+            <h4>Adresse de la demande :</h4>
+            <p>À l'attention de Madame le Chef de Service des secours au décès et des oppositions</p>
+        </div>
+        
+        <div id="tab3" class="tab-content">
+            <h3>Documents à fournir :</h3>
+            <ul style="list-style-type: disc; margin-left: 20px; line-height: 1.6;">
+                <li>Demande (Veuf/ve)</li>
+                <li>Acte de décès (Original + Photocopie)</li>
+                <li>Acte de mariage</li>
+                <li>Certificat de non séparation du corps et de non divorce</li>
+                <li>Bulletin de pension (Photocopie)</li>
+                <li>Photocopie CIN du/de la veuf(ve)</li>
+                <li>Acte de naissance des enfants</li>
+                <li>Acte de naissance du/de la veuf(ve)</li>
+                <li>Certificat de vie des enfants mineurs (FKT)</li>
+            </ul>
+            
+            <h4>Note importante :</h4>
+            <p>Tous les documents originaux seront restitués après vérification. Les photocopies doivent être certifiées conformes aux originaux.</p>
+        </div>
+        
+        <div id="tab4" class="tab-content">
+            <h3>Documents à fournir :</h3>
+            <ul style="list-style-type: disc; margin-left: 20px; line-height: 1.6;">
+                <li>Demande</li>
+                <li>Acte de décès (2 exemplaires)</li>
+                <li>Dernier bulletin de solde</li>
+                <li>Photocopie CIN (4 exemplaires)</li>
+                <li>Acte de mariage</li>
+                <li>Certificat de non séparation du corps et de non divorce</li>
+                <li>Acte de naissance du/de la veuf(ve)</li>
+                <li>Relevé de service (Visé FOP)</li>
+                <li>Validation (déclaration recette, état de décompte, ordre de recette)</li>
+                <li>Certificat de cessation de paiement</li>
+                <li>Acte de naissance des enfants</li>
+                <li>Certificat de Vie collectif des enfants</li>
+                <li>État signalétique de service militaire</li>
+            </ul>
+        </div>
+        
+        <div id="tab5" class="tab-content">
+            <h3>Documents requis :</h3>
+            
+            <h4>CHANGEMENT DE CARTE DE PENSION</h4>
+            <ul style="list-style-type: disc; margin-left: 20px; line-height: 1.6;">
+                <li>Demande</li>
+                <li>Bulletin de pension</li>
+                <li>Photocopie CIN</li>
+                <li>Ancienne carte / Déclaration de perte auprès de la gendarmerie ou de la Police nationale</li>
+            </ul>
+            
+            <h4>CHANGEMENT D'ASSIGNATION</h4>
+            <ul style="list-style-type: disc; margin-left: 20px; line-height: 1.6;">
+                <li>Imprimé (Alaina any amin'ny Perception)</li>
+                <li>Bulletin de pension</li>
+                <li>Photocopie CIN</li>
+            </ul>
+            
+            <h4>MAJORATION PR ENFANTS</h4>
+            <ul style="list-style-type: disc; margin-left: 20px; line-height: 1.6;">
+                <li>Imprimé MAE</li>
+                <li>Bulletin de pension</li>
+                <li>Photocopie CIN</li>
+            </ul>
+        </div>
+        
+        <div id="tab6" class="tab-content">
+            <h3>Documents requis :</h3>
+            <ul style="list-style-type: disc; margin-left: 20px; line-height: 1.6;">
+                <li>Un (01) Certificat de vie du pensionné</li>
+                <li>Un (01) certificat de résidence du pensionné</li>
+                <li>Une (01) photocopie certifiée conforme à l'original de la CIN du pensionné</li>
+                <li>Une (01) photocopie certifiée conforme à l'original de la carte pension</li>
+                <li>Une (01) photocopie du dernier bulletin de pension perçu</li>
+                <li>Formulaire de demande de changement d'assignation complété et signé par le chef de Poste Comptable payeur</li>
+            </ul>
+        </div>
+        
+        <div id="tab7" class="tab-content">
+            <h3>Documents requis :</h3>
+            <ul style="list-style-type: disc; margin-left: 20px; line-height: 1.6;">
+                <li>Un (01) Relevé d'Identité Bancaire d'un compte ouvert au nom du pensionné</li>
+                <li>Un (01) Certificat de vie du pensionné</li>
+                <li>Une (01) photocopie certifiée conforme à l'original de la CIN du pensionné</li>
+                <li>Une (01) photocopie certifiée conforme à l'original de la carte pension</li>
+                <li>Une (01) photocopie du dernier bulletin de pension perçu</li>
+                <li>Formulaire de demande de changement d'assignation complété et signé par le chef de Poste Comptable payeur</li>
+            </ul>
+            
+            <h4>Important :</h4>
+            <p>Pour les virements bancaires, veuillez fournir un RIB à jour.</p>
+        </div>
+        
+        <div id="tab8" class="tab-content">
+            <h3>Pièces justificatives requises :</h3>
+            <ul style="list-style-type: disc; margin-left: 20px; line-height: 1.6;">
+                <li>Ordonnance sur requête délivrée par le Tribunal de Première Instance ou acte notarié authentique</li>
+            </ul>
+            
+            <h4>A chaque paiement à la caisse, les pièces justificatives suivantes sont à produire :</h4>
+            
+            <h5>Un (01) certificat de vie (C2V) du mandant :</h5>
+            <ul style="list-style-type: none; margin-left: 40px; line-height: 1.6;">
+                <li>- Validité de 48 heures pour un C2V délivré à Analamanga</li>
+                <li>- 72 heures pour un C2V délivré en provinces</li>
+                <li>- Un (01) mois pour un C2V délivré à l'étranger</li>
+            </ul>
+            
+            <h5>Pour les C2V délivrés par le Chef Fokontany, deux (02) témoins sont exigés avec :</h5>
+            <ul style="list-style-type: none; margin-left: 40px; line-height: 1.6;">
+                <li>- Nom et prénom</li>
+                <li>- Numéro CIN avec date de délivrance et duplicata</li>
+                <li>- Adresse</li>
+                <li>- Signature</li>
+            </ul>
+            
+            <h5>Autres pièces requises :</h5>
+            <ul style="list-style-type: none; margin-left: 40px; line-height: 1.6;">
+                <li>- Une (01) photocopie certifiée conforme à l'original de la CIN du mandant</li>
+                <li>- Une (01) photocopie certifiée conforme à l'original de la CIN du mandataire</li>
+            </ul>
+        </div>
+    </div>
+    
+    
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Retirer la classe active de tous les boutons et contenus
+                    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    
+                    // Ajouter la classe active au bouton cliqué
+                    this.classList.add('active');
+                    
+                    // Afficher le contenu correspondant
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+        });
+    </script>
+        
+        <footer>
+            <p>&copy; 2026 Direction de la Comptabilité Publique. Tous droits réservés.</p>
+            
+        </footer>
+    </body>
+</html>
