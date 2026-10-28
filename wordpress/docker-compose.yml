@@ -1,0 +1,36 @@
+# WordPress local pour la borne PGA.
+# Lancer :  docker compose up -d     (dans ce dossier)
+# Ouvrir :  http://localhost:8080
+# Arrêter : docker compose down      (les données sont conservées)
+services:
+  db:
+    image: mariadb:11.4
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: borne_pga
+      MARIADB_USER: borne_pga
+      MARIADB_PASSWORD: borne_pga
+      MARIADB_ROOT_PASSWORD: borne_pga_root
+    volumes:
+      - db_data:/var/lib/mysql
+
+  wordpress:
+    image: wordpress:6.8-php8.3-apache
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: borne_pga
+      WORDPRESS_DB_USER: borne_pga
+      WORDPRESS_DB_PASSWORD: borne_pga
+    volumes:
+      - wp_data:/var/www/html
+      # Le thème du dépôt est utilisé directement : une modification est visible tout de suite.
+      - ./wp-content/themes/borne-pga:/var/www/html/wp-content/themes/borne-pga
+
+volumes:
+  db_data:
+  wp_data:
